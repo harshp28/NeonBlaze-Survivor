@@ -49,6 +49,20 @@ body {
     z-index: 10;
 }
 
+.modal-content {
+    background-color: white;
+    max-width: 28rem;
+    width: 100%;
+    padding: 1.5rem;
+    border-radius: 1rem; /* Adjust this value for roundness */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5); /* Optional: add some shadow */
+}
+
+/* Instructions Styling */
+#modalEl p {
+    margin: 0.5rem 0; /* Space between instructions */
+}
+
 .bg-white {
     background-color: white;
 }
