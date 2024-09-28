@@ -29,6 +29,9 @@ class Player {
         this.radius = radius;
         this.color = color;
         this.velocity = { x: 0, y: 0 }; // Initialize velocity
+        this.speed = 3; // Normal speed
+        this.boostedSpeed = 6; // Speed during boost
+        this.isBoosted = false; // Track boost state
     }
     draw() {
         c.beginPath();
@@ -329,26 +332,36 @@ window.addEventListener('keydown', (event) => {
     switch (event.key) {
         case 'w':
         case 'W':
-            player.velocity.y = -3; // Move up
+            player.velocity.y = -player.speed; // Move up
             break;
         case 's':
         case 'S':
-            player.velocity.y = 3; // Move down
+            player.velocity.y = player.speed; // Move down
             break;
         case 'a':
         case 'A':
-            player.velocity.x = -3; // Move left
+            player.velocity.x = -player.speed; // Move left
             break;
         case 'd':
         case 'D':
-            player.velocity.x = 3; // Move right
+            player.velocity.x = player.speed; // Move right
             break;
+        case ' ':
+                player.isBoosted = true; // Activate boost
+                player.velocity.x *= player.boostedSpeed / player.speed; // Apply boost
+                player.velocity.y *= player.boostedSpeed / player.speed; // Apply boost
+                break;
     }
 });
 
 // Stop player movement on key up
 window.addEventListener('keyup', (event) => {
     switch (event.key) {
+        case ' ':
+            player.isBoosted = false; // Deactivate boost
+            player.velocity.x = (player.velocity.x / player.boostedSpeed) * player.speed; // Reset speed
+            player.velocity.y = (player.velocity.y / player.boostedSpeed) * player.speed; // Reset speed
+            break;
         case 'w':
         case 'W':
         case 's':
