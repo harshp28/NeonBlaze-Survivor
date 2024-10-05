@@ -1,0 +1,105 @@
+body, html {
+    height: 100%;
+    margin: 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.video-background {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    z-index: -1;
+    transform: translate(-50%, -50%);
+}
+
+.content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    z-index: 1;
+    color: white;
+}
+
+.neon-heading {
+    font-size: 3rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-shadow: 0 0 5px rgba(255, 165, 0, 0.7), 
+                 0 0 10px rgba(255, 165, 0, 0.7), 
+                 0 0 15px rgba(255, 255, 0, 1), 
+                 0 0 20px rgba(255, 255, 0, 1);
+    animation: neon-blink 1.5s infinite alternate;
+}
+
+@keyframes neon-blink {
+    0% { opacity: 0.8; }
+    100% { opacity: 1; }
+}
+
+.play-text {
+    font-size: 2.5rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #ffcc00; /* Yellow color */
+    text-shadow: 0 0 5px rgba(255, 204, 0, 0.7), 
+                 0 0 10px rgba(255, 204, 0, 0.7), 
+                 0 0 15px rgba(255, 165, 0, 1), 
+                 0 0 20px rgba(255, 165, 0, 1);
+    animation: play-blink 1s infinite alternate;
+}
+
+@keyframes play-blink {
+    0% { opacity: 0.8; transform: scale(1); }
+    100% { opacity: 1; transform: scale(1.1); }
+}
+
+.btn-outline-custom {
+    border: 2px solid #ffcc00; /* Yellow border */
+    color: #ffcc00; /* Yellow text */
+    background: transparent;
+    border-radius: 30px;
+    padding: 12px 30px;
+    font-size: 1.25rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(255, 204, 0, 0.5);
+}
+
+.btn-outline-custom:hover {
+    background: #ffcc00; /* Yellow background on hover */
+    color: white;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(255, 204, 0, 0.6);
+}
+
+.btn-outline-custom:focus {
+    background: #ff9933; /* Orange background on focus */
+    color: white;
+}
+footer {
+    position: absolute;
+    bottom: 10px; /* Adjust as needed */
+    width: 100%;
+    color: #ffcc00; /* Match the button text color */
+    font-size: 1rem;
+    z-index: 1; /* Keep it above the video */
+    text-shadow: 0 0 5px rgba(255, 204, 0, 0.7), 
+                 0 0 10px rgba(255, 204, 0, 0.7);
+}
+
+.instruction-text {
+    position: relative;
+    padding-top: 1.5rem;
+    width: 100%;
+    color: #ffcc00;
+    font-size: 1rem;
+    text-shadow: 0 0 5px rgba(255, 204, 0, 0.7), 
+                 0 0 10px rgba(255, 204, 0, 0.7);
+
+}
