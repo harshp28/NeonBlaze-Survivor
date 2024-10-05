@@ -1,0 +1,64 @@
+/* Neon Glow for Modal Background */
+.neon-background {
+    background-color: rgba(0, 0, 0, 0.8);
+    box-shadow: 0 0 15px rgba(255, 165, 0, 0.7), 
+                0 0 20px rgba(255, 255, 0, 0.8);
+    border-radius: 15px;
+}
+
+/* Neon Heading */
+.neon-heading {
+    font-size: 3rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #ffcc00;
+    text-shadow: 0 0 5px rgba(255, 165, 0, 0.7), 
+                 0 0 10px rgba(255, 165, 0, 1);
+    animation: neon-blink 1.5s infinite alternate;
+}
+
+/* Neon Instruction Text */
+.neon-instruction {
+    color: #ffcc00;
+    text-shadow: 0 0 5px rgba(255, 165, 0, 0.7), 
+                 0 0 10px rgba(255, 165, 0, 1);
+}
+
+.button-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem; /* Add spacing between buttons */
+}
+
+/* Neon Buttons */
+.neon-btn {
+    border: 2px solid #ffcc00;
+    color: #ffcc00;
+    background: transparent;
+    border-radius: 30px;
+    padding: 12px 30px;
+    font-size: 1.25rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(255, 204, 0, 0.5);
+}
+
+.neon-btn:hover {
+    background-color: #ffcc00;
+    color: white;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(255, 204, 0, 0.6);
+}
+
+/* Modal Animation */
+@keyframes neon-blink {
+    0% { opacity: 0.8; }
+    100% { opacity: 1; }
+}
+
+h1 {
+    color: #ffcc00;
+    text-shadow: 0 0 5px rgba(255, 165, 0, 0.7), 
+                 0 0 10px rgba(255, 165, 0, 1);
+}

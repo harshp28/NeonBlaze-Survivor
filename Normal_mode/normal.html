@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NeonBlaze: Survivor</title>
+    <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            margin: 0;
+            background: black;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+    <div class="fixed text-white text-sm ml-2 mt-1 select-none">
+        <span> </span><span id="scoreEl">0</span>
+    </div>
+    <div class="fixed text-white text-sm ml-2 mt-1 select-none" style="right: 10px; top: 10px;">
+        <span>Time: </span><span id="timerEl">0</span>s
+    </div>
+    
+    <div class="fixed inset-0 flex items-center justify-center" id="modalEl">
+        <div class="modal-content neon-background">
+            <div class="max-w-md w-full p-6 text-center">
+                <h1 class="neon-heading">NeonBlaze: Survivor</h1>
+                <p class="text-sm neon-instruction mb-4">Game Mode: Normal</p>
+                <h1 class="text-4xl font-bold neon-score mb-4" id="bigScoreEl">0</h1>
+                <p class="text-sm neon-instruction mb-4">Points</p>
+                <p class="text-sm neon-instruction">Move: W, A, S, D</p>
+                <p class="text-sm neon-instruction">Boost: Spacebar</p>
+                <p class="text-sm neon-instruction mb-4">Shoot: Mouse/touchpad</p>
+            </div>       
+            <div class="button-container">
+                <button class="btn-outline-custom neon-btn mb-2" id="startGameBtn">Start Game</button>
+                <a href="../index.html">
+                    <button class="btn-outline-custom neon-btn mb-2" id="homeBtn">Home</button>
+                </a>
+            </div>
+        </div>
+    </div>
+    <canvas></canvas>
+    <audio id="explosionSound" src="./audio/explosion-sound-effect-1-full-pack-on-gamesfxpackscom-241821.mp3"></audio>
+    <audio id="backgroundMusic" src="./audio/neon-gaming.wav" loop></audio>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.1/gsap.min.js" integrity="sha512-IQLehpLoVS4fNzl7IfH8Iowfm5+RiMGtHykgZJl9AWMgqx0AmJ6cRWcB+GaGVtIsnC4voMfm8f2vwtY+6oPjpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="./class.js"></script>
+    <script src="./normal.js"></script>
+</body>
+</html>
