@@ -10,13 +10,32 @@ class Player {
         this.speed = 3; // Normal speed
         this.boostedSpeed = 6; // Speed during boost
         this.isBoosted = false; // Track boost state
+        this.glowIntensity = 15; // Default glow intensity
     }
+
     draw() {
+        c.save();  // Save current canvas state
+
+        // Increase glow intensity when boosting
+        if (this.isBoosted) {
+            this.glowIntensity = 30; // Higher intensity when boosting
+        } else {
+            this.glowIntensity = 15; // Normal intensity
+        }
+
+        // Set up the glow effect for the player
+        c.shadowBlur = this.glowIntensity;
+        c.shadowColor = this.color; // Glow matches the player's color
+
+        // Draw the player
         c.beginPath();
         c.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
         c.fillStyle = this.color;
         c.fill();
+
+        c.restore();  // Restore canvas state
     }
+
     update() {
         this.x += this.velocity.x;
         this.y += this.velocity.y;
@@ -27,7 +46,7 @@ class Player {
         if (this.y - this.radius < 0) this.y = this.radius;
         if (this.y + this.radius > canvas.height) this.y = canvas.height - this.radius;
 
-        this.draw();
+        this.draw(); // Call draw method to render the player
     }
 }
 
@@ -59,13 +78,23 @@ class Enemy {
         this.radius = radius;
         this.color = color;
         this.velocity = velocity;
+        this.glowIntensity = Math.random() * 20 + 10;  // Random glow intensity
     }
 
     draw() {
+        c.save();  // Save current canvas state
+
+        // Set up the glow effect
+        c.shadowBlur = this.glowIntensity;
+        c.shadowColor = this.color;
+
+        // Draw the enemy
         c.beginPath();
         c.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
         c.fillStyle = this.color;
         c.fill();
+
+        c.restore();  // Restore the canvas state (removes the glow for other objects)
     }
 
     update(player) {
@@ -78,7 +107,7 @@ class Enemy {
         this.x += this.velocity.x;
         this.y += this.velocity.y;
 
-        // Draw the enemy
+        // Draw the enemy with the glow effect
         this.draw();
     }
 }
