@@ -16,6 +16,7 @@ const modalEl = document.querySelector('#modalEl');
 const bigScoreEl = document.querySelector('#bigScoreEl');
 const backgroundMusic = document.querySelector('#backgroundMusic');
 const timerEl = document.querySelector('#timerEl');  // Timer element
+const healthBarEl = document.querySelector('#healthBar'); // Select the health bar element
 backgroundMusic.loop = true;
 const explosionSound = document.querySelector('#explosionSound');
 
@@ -23,9 +24,12 @@ let timer = 0;
 let intervalId;
 let enemySpawnInterval;
 let enemyShootInterval;  // Variable for enemy shoot interval
-const enemySpawnRate = 1500; // Fixed enemy spawn rate in milliseconds
-const enemySpeed = 1; // Fixed enemy speed
+const enemySpawnRate = 1300; // Fixed enemy spawn rate in milliseconds
+const enemySpeed = 2.2; // Fixed enemy speed
 let gameOver = false; // Flag to indicate game over state
+
+let playerHealth = 100; // Initialize player health
+const maxHealth = 100;   // Max health for the player
 
 const x = canvas.width / 2;
 const y = canvas.height / 2;
@@ -61,6 +65,8 @@ function init() {
     enemies = [];
     particles = [];
     invaderProjectiles = [];  // Reset enemy projectiles
+    playerHealth = maxHealth; // Reset player health
+    updateHealthBar();        // Update health bar
     score = 0;
     scoreEl.innerHTML = `Score: ${score}`;
     bigScoreEl.innerHTML = score;
@@ -69,6 +75,17 @@ function init() {
     clearInterval(enemySpawnInterval);
     clearInterval(enemyShootInterval);  // Clear any existing shoot interval
     initStars();  // Initialize stars at the start of the game
+}
+
+function updateHealthBar() {
+    const healthPercentage = (playerHealth / maxHealth) * 100;
+    healthBarEl.style.width = `${healthPercentage}%`;
+    if (healthPercentage <= 0) {
+        modalEl.style.display = 'flex';
+        bigScoreEl.innerHTML = score;
+        backgroundMusic.pause();
+        backgroundMusic.currentTime = 0;
+    }
 }
 
 // Function to spawn enemies at a fixed rate
@@ -150,19 +167,15 @@ function animate() {
             invaderProjectile.position.y <= player.y + player.radius &&
             invaderProjectile.position.x >= player.x - player.radius &&
             invaderProjectile.position.x <= player.x + player.radius
-        ) {
-            explosionSound.play(); 
-            gameOver = true;  // Set the game over flag
-            cancelAnimationFrame(animationId);
-            clearInterval(intervalId);
-            clearInterval(enemySpawnInterval);
-            clearInterval(enemyShootInterval);
-            setTimeout(() => {
-                modalEl.style.display = 'flex';
-                bigScoreEl.innerHTML = score;
-                backgroundMusic.pause();
-                backgroundMusic.currentTime = 0;
-            }, 0); 
+        ){
+            explosionSound.play();
+            playerHealth -= 20;  // Decrease health by 20
+            updateHealthBar();   // Update health bar
+            if (playerHealth <= 0) {
+                clearInterval(intervalId); // Stop the timer
+                gameOver = true;
+            }
+            invaderProjectiles.splice(index, 1);
         }
 
         // Remove projectiles that go off-screen
@@ -178,18 +191,11 @@ function animate() {
 
         // Check for collision with the player
         if (dist - enemy.radius - player.radius < 1) {
-            explosionSound.play(); 
-            gameOver = true;
-            cancelAnimationFrame(animationId);
+            explosionSound.play();
+            playerHealth = 0;  // Set health to zero on collision
+            updateHealthBar(); // Update health bar
             clearInterval(intervalId); // Stop the timer
-            clearInterval(enemySpawnInterval); // Stop enemy spawning
-            clearInterval(enemyShootInterval); // Stop enemy shooting
-            setTimeout(() => {
-                modalEl.style.display = 'flex';
-                bigScoreEl.innerHTML = score;
-                backgroundMusic.pause();
-                backgroundMusic.currentTime = 0;
-            }, 0);
+            gameOver = true; // Set game over flag
         }
 
         projectiles.forEach((projectile, projectileIndex) => {
