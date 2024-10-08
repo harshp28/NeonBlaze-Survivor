@@ -62,3 +62,18 @@ h1 {
     text-shadow: 0 0 5px rgba(255, 165, 0, 0.7), 
                  0 0 10px rgba(255, 165, 0, 1);
 }
+
+#healthContainer {
+    border: 2px solid #ff0000;
+    border-radius: 10px;
+    width: 100%;  /* 100% width to match the container */
+    height: 20px;
+    margin: 0 auto;  /* Center the health container */
+}
+
+#healthBar {
+    background-color: #ff3333;
+    height: 100%;
+    width: 100%;
+    transition: width 0.01s ease;
+}
